@@ -5,6 +5,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wallet_app/util/my_button.dart';
 import 'package:wallet_app/util/my_card.dart';
 import 'package:wallet_app/util/my_list_tile.dart';
+import 'package:wallet_app/util/balance_categories.dart';
+import 'package:wallet_app/util/piechart_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Color.fromRGBO(193, 214, 233, 1),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.pink,
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 28, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        ' Cards',
+                        ' Acount',
                         style: TextStyle(fontSize: 28),
                       ),
                     ],
@@ -80,46 +82,104 @@ class _HomePageState extends State<HomePage> {
             ),
 
             SizedBox(height: 25),
-
-            //cards
-            Container(
-              height: 200,
-              child: PageView(
-                scrollDirection: Axis.horizontal,
-                controller: _controller,
-                children: [
-                  MyCard(
-                    balance: 5250.25,
-                    cardNumber: 123456,
-                    expiryMonth: 11,
-                    expiryYear: 23,
-                    color: Colors.deepPurple[400],
-                  ),
-                  MyCard(
-                    balance: 123.75,
-                    cardNumber: 789465,
-                    expiryMonth: 10,
-                    expiryYear: 24,
-                    color: Colors.blue[400],
-                  ),
-                  MyCard(
-                    balance: 789.53,
-                    cardNumber: 456191,
-                    expiryMonth: 6,
-                    expiryYear: 19,
-                    color: Colors.green[400],
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Container(
+                width: 300,
+                height: 300,
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(193, 214, 233, 1),
+                    borderRadius: BorderRadius.circular(12)),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        // ignore: sort_child_properties_last
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Balance:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '\$1280.20',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        flex: 1,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 3,
+                              child: BalanceCategories(),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: PieChartView(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
               ),
             ),
-
             SizedBox(height: 25),
+            //cards
+            // Container(
+            //   height: 200,
+            //   child: PageView(
+            //     scrollDirection: Axis.horizontal,
+            //     controller: _controller,
+            //     children: [
+            //       MyCard(
+            //         balance: 5250.25,
+            //         cardNumber: 123456,
+            //         expiryMonth: 11,
+            //         expiryYear: 23,
+            //         color: Colors.deepPurple[400],
+            //       ),
+            //       MyCard(
+            //         balance: 123.75,
+            //         cardNumber: 789465,
+            //         expiryMonth: 10,
+            //         expiryYear: 24,
+            //         color: Colors.blue[400],
+            //       ),
+            //       MyCard(
+            //         balance: 789.53,
+            //         cardNumber: 456191,
+            //         expiryMonth: 6,
+            //         expiryYear: 19,
+            //         color: Colors.green[400],
+            //       ),
+            //     ],
+            //   ),
+            // ),
 
-            SmoothPageIndicator(
-              controller: _controller,
-              count: 3,
-              effect: ExpandingDotsEffect(activeDotColor: Colors.grey.shade800),
-            ),
+            // SizedBox(height: 25),
+
+            // SmoothPageIndicator(
+            //   controller: _controller,
+            //   count: 3,
+            //   effect: ExpandingDotsEffect(activeDotColor: Colors.grey.shade800),
+            // ),
             SizedBox(height: 25),
             //3buttons
             Padding(
@@ -137,11 +197,19 @@ class _HomePageState extends State<HomePage> {
                       icomImagePath: 'lib/icons/credit-card.png'),
                   //bills
                   MyButton(
-                      buttonText: 'Bills', icomImagePath: 'lib/icons/bill.png'),
+                      buttonText: 'Recieve',
+                      icomImagePath: 'lib/icons/receiver.png'),
                 ],
               ),
             ),
             SizedBox(height: 25),
+
+            Container(
+              child: Text(
+                'Assets ',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            ),
             //column
             Padding(
               padding: const EdgeInsets.all(25.0),
